@@ -1,0 +1,19 @@
+---
+
+language: bash
+services: docker
+
+env:
+  - VERSION=master
+  - VERSION=1.1.4
+  - VERSION=1.1.3
+
+install:
+  - git clone https://github.com/Teebor-Choka/fastnetmon-docker.git ~/fastnetmon
+  - cd ~/fastnetmon
+
+script:
+  - ./hooks/build.sh
+
+after_script:
+  - docker images
