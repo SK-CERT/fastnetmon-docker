@@ -10,4 +10,4 @@ docker build . \
 
 image_id=$(docker images "$TAG" --format "{{.ID}}")
 
-docker run --rm --entrypoint 'echo "Hello!"' "$image_id"
+docker run --rm --entrypoint /bin/bash "$image_id" -c ls -al
