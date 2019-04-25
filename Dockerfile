@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certifi
     rm -f /fastnetmon_install.pl && \
     apt-get purge -y wget ca-certificates perl && apt-get autoremove -y
 
-ADD ./assets /opt/fastnetmon/_assets
+COPY ./assets/entrypoint.sh /entrypoint.sh
 
 LABEL org.label-schema.name="FastNetMon" \
       org.label-schema.description="DDoS detection tool" \
@@ -27,5 +27,5 @@ EXPOSE 2055/udp
 EXPOSE 6343/udp
 EXPOSE 179/tcp
 
-ENTRYPOINT ["/opt/fastnetmon/_assets/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/opt/fastnetmon/fastnetmon"]
