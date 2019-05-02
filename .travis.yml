@@ -4,9 +4,8 @@ language: bash
 services: docker
 
 env:
-  - VERSION=master
-  - VERSION=v1.1.4
-  - VERSION=v1.1.3
+  - VERSION=latest
+  - VERSION=stable
 
 install:
   - git clone https://github.com/Teebor-Choka/fastnetmon-docker.git ~/fastnetmon

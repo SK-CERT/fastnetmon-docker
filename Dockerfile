@@ -1,6 +1,6 @@
 FROM debian:stretch-slim AS build
 
-ARG version=v1.1.4
+ARG VERSION=stable
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VCS_URL
@@ -8,8 +8,8 @@ ARG VCS_URL
 WORKDIR /
 
 RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates perl && \
-    wget https://raw.githubusercontent.com/pavel-odintsov/fastnetmon/${version}/src/fastnetmon_install.pl -Ofastnetmon_install.pl && \
-    echo build@example.com | perl fastnetmon_install.pl --do-not-track-me && \
+    wget https://raw.githubusercontent.com/pavel-odintsov/fastnetmon/master/src/fastnetmon_install.pl -Ofastnetmon_install.pl && \
+    echo build@example.com | if [ "x$VERSION" = "stable" ] ; then perl fastnetmon_install.pl --do-not-track-me ; else perl fastnetmon_install.pl --do-not-track-me --use-git-master ; fi && \
     rm -f /fastnetmon_install.pl && \
     apt-get purge -y wget ca-certificates perl && apt-get autoremove -y
 
