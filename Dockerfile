@@ -11,7 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certifi
     wget https://raw.githubusercontent.com/pavel-odintsov/fastnetmon/master/src/fastnetmon_install.pl -Ofastnetmon_install.pl && \
     echo build@example.com | if [ "x$VERSION" = "stable" ] ; then perl fastnetmon_install.pl --do-not-track-me ; else perl fastnetmon_install.pl --do-not-track-me --use-git-master ; fi && \
     rm -f /fastnetmon_install.pl && \
-    apt-get purge -y wget ca-certificates perl && apt-get autoremove -y
+    apt-get purge -y wget ca-certificates perl && apt-get autoremove -y && \
+    apt-get clean -y && \
+    apt-get autoclean -y && \
+    rm -rf /var/cache/* && \
+    rm -rf /tmp/*
 
 COPY ./assets/entrypoint.sh /entrypoint.sh
 
